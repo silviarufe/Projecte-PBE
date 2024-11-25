@@ -1,0 +1,50 @@
+/* Fonts generals */
+* {
+  font-family: monospace;
+}
+
+/* Botons */
+button {
+  border-radius: 12px;
+  padding: 10px 20px;
+  color: white;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+button#auth_button {
+  background-color: #28a745; /* Verd */
+}
+
+button#logout_button {
+  background-color: #dc3545; /* Vermell */
+}
+
+button#query_button {
+  background-color: #ffc107; /* Groc */
+}
+
+/* TextViews */
+textview {
+  border: 1px solid #ccc;
+  padding: 2px;
+  background-color: #f9f9f9;
+}
+
+textview#header {
+  background-color: #2a2a2a; /* Fosc */
+  color: white;
+  font-weight: bold;
+}
+
+textview#row_even {
+  background-color: #d3ecf8; /* Blau cel */
+}
+
+textview#row_odd {
+  background-color: #4682b4; /* Blau fosc */
+  color: white;
+}
+
