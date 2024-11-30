@@ -4,7 +4,7 @@ require 'gtk3'
 require 'json'
 require 'net/http'
 require 'uri'
-#require 'i2c/drivers/lcd'
+require 'i2c/drivers/lcd'
 require_relative 'puzzle1'
 
 # Retiro la variable lcd de la part global i la defino dins de la classe
@@ -69,7 +69,7 @@ class SimpleClientApp
     @window.add(@vbox)
 
     # Crear la instÃ ncia de la pantalla LCD dins de la classe
-    #@lcd = I2C::Drivers::LCD::Display.new('/dev/i2c-1', 0x27, rows=4, cols=20)
+    @lcd = I2C::Drivers::LCD::Display.new('/dev/i2c-1', 0x27, rows=4, cols=20)
 
     # Carregar els estils des d'un fitxer CSS extern
     load_css_from_file('styles.css')
@@ -113,9 +113,9 @@ end
     header_box = Gtk::Box.new(:horizontal, 5)
 
     # Mostrar un missatge de benvinguda a la pantalla LCD
-    #@lcd.clear
-    #@lcd.text('    Welcome', 1)
-    #@lcd.text("#{name}!", 2)
+    @lcd.clear
+    @lcd.text('    Welcome', 1)
+    @lcd.text("#{name}!", 2)
 
     welcome_label = Gtk::Label.new("Benvingut/da, #{name}!")
     header_box.pack_start(welcome_label, expand: true, fill: true, padding: 10)
