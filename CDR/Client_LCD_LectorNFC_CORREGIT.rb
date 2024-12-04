@@ -7,12 +7,9 @@ require 'uri'
 require 'i2c/drivers/lcd'
 require_relative 'puzzle1'
 
-# Retiro la variable lcd de la part global i la defino dins de la classe
 
 BASE_URL = 'http://192.168.1.1:3000'
 
-require 'net/http'
-require 'json'
 
 def fetch_data(path, params = {}, on_success: nil, on_error: nil, on_exception: nil)
   uri = URI("#{BASE_URL}#{path}")
