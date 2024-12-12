@@ -7,10 +7,10 @@ const url = require('url'); //necessari per tractar els paràmetres de consulta
 
 // Configuración de la conexión con la base de datos
 const connection = mysql.createConnection({
-  host: '192.168.1.46', // Dirección IP de tu ordenador
-  user: 'root',         // Usuario de MySQL
-  password: '1234',     // Contraseña de MySQL
-  database: 'pbe',      // Nombre de tu base de datos
+  host: '192.168.1.46', // Direcció IP
+  user: 'root',         // Usuari de MySQL
+  password: '1234',     // Contrasenya de MySQL
+  database: 'pbe',      // base de dades
   port: 3306            // Port de MySQL
 });
 
