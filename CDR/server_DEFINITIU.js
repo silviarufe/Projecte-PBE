@@ -1,4 +1,5 @@
-//Versió corregida del servidor
+
+// ----------- VERSIÓ DEFINITIVA --------------
 
 const http = require('http');
 const mysql = require('mysql2');
@@ -6,7 +7,7 @@ const url = require('url'); //necessari per tractar els paràmetres de consulta
 
 // Configuración de la conexión con la base de datos
 const connection = mysql.createConnection({
-  host: '192.168.1.1', // Dirección IP de tu ordenador
+  host: '192.168.1.46', // Dirección IP de tu ordenador
   user: 'root',         // Usuario de MySQL
   password: '1234',     // Contraseña de MySQL
   database: 'pbe',      // Nombre de tu base de datos
@@ -211,44 +212,56 @@ setInterval(() => {
 
 // Escuchar en el puerto 3000
 const PORT = 3000;
-server.listen(PORT, '192.168.1.1', () => {
-  console.log(`Servidor escuchando en http://192.168.1.1:${PORT}`);
+server.listen(PORT, '192.168.1.46', () => {
+  console.log(`Servidor escuchando en http://192.168.1.46:${PORT}`);
 });
 
-
-function order(data){
+function order(data) {
     const now = new Date();
-    const currentDay = now.toLocaleDateString('en-US', { weekday: 'short'}); // Dia de la setmana actual
-    const currentHour = `${now.getHours().toString().padStart(2, '0')}:00:00`; //hora actual
+    const currentDay = now.toLocaleDateString('en-US', { weekday: 'short' });
+    const currentHour = `${now.getHours().toString().padStart(2, '0')}:00:00`;
 
     const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
     const todayIndex = weekDays.indexOf(currentDay);
 
-    return data.sort((a,b) => {
+    return data.sort((a, b) => {
         const aDayIndex = weekDays.indexOf(a.day);
         const bDayIndex = weekDays.indexOf(b.day);
 
-        const aDayPriority = (aDayIndex - todayIndex + weekDays.length)%weekDays.length;
-        const bDayPriority = (bDayIndex - todayIndex + weekDays.length)%weekDays.length;
+        // Prioritat cíclica per dia
+        const aDayPriority = (aDayIndex - todayIndex + weekDays.length) % weekDays.length;
+        const bDayPriority = (bDayIndex - todayIndex + weekDays.length) % weekDays.length;
 
-        if (aDayPriority !== bDayPriority){
+        const currentHourTime = new Date(`1970-01-01T${currentHour}Z`).getTime();
+        const aTime = new Date(`1970-01-01T${a.hour}Z`).getTime();
+        const bTime = new Date(`1970-01-01T${b.hour}Z`).getTime();
+
+        // Si els dies són diferents, ordenem pel dia més proper
+        if (aDayPriority !== bDayPriority) {
             return aDayPriority - bDayPriority;
         }
 
-        const aTime = new Date(`1970-01-01T${a.hour}Z`);
-        const bTime = new Date(`1970-01-01T${b.hour}Z`);
+        // Si és el mateix dia, gestionem les hores
+        if (aDayPriority === 0) {
+            const aAfterNow = aTime >= currentHourTime;
+            const bAfterNow = bTime >= currentHourTime;
 
-        if(aDayPriority === 0){
-            const currentHourTime = new Date(`1970-01-01T${currentHour}Z`).getTime();
-            if(aTime < currentHourTime && bTime >= currentHourTime){
-                return 1;
-            }
-            if(bTime < currentHourTime && aTime >= currentHourTime){
-                return -1;
-            }
+            // Esdeveniments del dia actual que encara han d'ocórrer tenen prioritat
+            if (aAfterNow && !bAfterNow) return -1;
+            if (!aAfterNow && bAfterNow) return 1;
+
+            // Si ambdós han passat, posarem aquests esdeveniments al final
+            if (!aAfterNow && !bAfterNow) return 1;
+
+            // Si ambdós estan després o ambdós ja han passat, ordenem per hora
+            return aTime - bTime;
         }
+
+        // Si és un altre dia, ordenem per hora dins d'aquest dia
         return aTime - bTime;
     });
-
 }
+
+
+
 
