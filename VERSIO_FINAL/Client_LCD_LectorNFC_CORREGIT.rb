@@ -1,4 +1,4 @@
-# Vesrió Corregida del client
+# ---------------VERSIÓ FINAL DEL CDR-------------------------
 
 require 'gtk3'
 require 'json'
