@@ -219,49 +219,60 @@ server.listen(PORT, '192.168.1.46', () => {
 function order(data) {
     const now = new Date();
     const currentDay = now.toLocaleDateString('en-US', { weekday: 'short' });
-    const currentHour = `${now.getHours().toString().padStart(2, '0')}:00:00`;
+    const currentHour = now.getHours();
 
     const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
     const todayIndex = weekDays.indexOf(currentDay);
 
-    return data.sort((a, b) => {
+    // Funció per obtenir només l'hora (`hh`) com a número a partir del string `hh:mm:ss`
+    function getHourFromTime(hourString) {
+        return parseInt(hourString.split(':')[0], 10);
+    }
+
+    // Primer, ordenem per dia i hora
+    const sortedData = data.sort((a, b) => {
         const aDayIndex = weekDays.indexOf(a.day);
         const bDayIndex = weekDays.indexOf(b.day);
 
-        // Prioritat cíclica per dia
+        // Calculem la prioritat cíclica del dia (a partir d'avui)
         const aDayPriority = (aDayIndex - todayIndex + weekDays.length) % weekDays.length;
         const bDayPriority = (bDayIndex - todayIndex + weekDays.length) % weekDays.length;
 
-        const currentHourTime = new Date(`1970-01-01T${currentHour}Z`).getTime();
-        const aTime = new Date(`1970-01-01T${a.hour}Z`).getTime();
-        const bTime = new Date(`1970-01-01T${b.hour}Z`).getTime();
-
-        // Si els dies són diferents, ordenem pel dia més proper
+        // Si estem en dies diferents, ordenem pel dia més proper
         if (aDayPriority !== bDayPriority) {
             return aDayPriority - bDayPriority;
         }
 
-        // Si és el mateix dia, gestionem les hores
-        if (aDayPriority === 0) {
-            const aAfterNow = aTime >= currentHourTime;
-            const bAfterNow = bTime >= currentHourTime;
+        // Si estem en el mateix dia (avui), ordenem per hora
+        const aHour = getHourFromTime(a.hour);
+        const bHour = getHourFromTime(b.hour);
 
-            // Esdeveniments del dia actual que encara han d'ocórrer tenen prioritat
-            if (aAfterNow && !bAfterNow) return -1;
-            if (!aAfterNow && bAfterNow) return 1;
-
-            // Si ambdós han passat, posarem aquests esdeveniments al final
-            if (!aAfterNow && !bAfterNow) return 1;
-
-            // Si ambdós estan després o ambdós ja han passat, ordenem per hora
-            return aTime - bTime;
-        }
-
-        // Si és un altre dia, ordenem per hora dins d'aquest dia
-        return aTime - bTime;
+        return aHour - bHour;
     });
+
+    // Després, movem els esdeveniments passats del dia actual al final
+    const todayEvents = [];
+    const otherEvents = [];
+    const pastEvents = [];
+
+    for (const event of sortedData) {
+        if (weekDays.indexOf(event.day) === todayIndex) {
+            const eventHour = getHourFromTime(event.hour);
+            if (eventHour < currentHour) {
+                // Afegim els esdeveniments passats al final del dia actual
+                pastEvents.push(event);
+                console.log(eventHour, currentHour);
+            } else {
+                // Afegim els esdeveniments futurs o actuals del dia actual
+                todayEvents.push(event);
+            }
+        } else {
+            // Afegim els esdeveniments d'altres dies
+            otherEvents.push(event);
+        }
+    }
+
+    return [...todayEvents, ...otherEvents, ...pastEvents];
 }
-
-
 
 
