@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="header">
+            <h1>Credencials UPC</h1>
+        </div>
+
+        <form class="login-form" id="loginForm">
+            <div class="input-group">
+                <label for="ip-port">IP i Port:</label>
+                <input type="text" id="ip-port" name="ip-port" placeholder="http://IP:PORT" required>
+            </div>
+            
+            <div class="input-group">
+                <label for="username">Nom d'usuari:</label>
+                <input type="text" id="username" name="username" placeholder="Nom d'usuari" required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Contrasenya:</label>
+                <input type="password" id="password" name="password" placeholder="Contrasenya" required>
+            </div>
+
+            <button type="submit" class="login-button">Login</button>
+        </form>
+    </div>
+
+    <!-- Vincula els arxius JavaScript -->
+    <script src="Connexio.js"></script>
+    <script src="login.js"></script>
+    <script src="RutaManager.js"></script>
+</body>
+</html>

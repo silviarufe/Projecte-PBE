@@ -1,0 +1,224 @@
+/* ------------------------------ */
+/* ESTIL PER A LOGIN (CSS ANTERIOR) */
+/* ------------------------------ */
+
+/* Fons blau clar */
+body {
+    background-color: #B4CFEC;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Contenidor central */
+.login-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* Títol de la pantalla */
+.header h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Formulari d'entrada */
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Grup de camps d'entrada */
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    text-align: left;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.input-group input:focus {
+    border-color: #9C27B0; /* Color de focus */
+    outline: none;
+}
+
+/* Botó de login */
+.login-button {
+    padding: 10px;
+    background-color: #9C27B0;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-button:hover {
+    background-color: #7B1FA2; /* Color més fosc en hover */
+}
+
+/* ------------------------------ */
+/* ESTIL PER A TAULA.HTML */
+/* ------------------------------ */
+
+/* Fons de la pàgina */
+#container {
+    background-color: #B4CFEC;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+/* Títol de benvinguda */
+#welcomeMessage {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Secció d'entrada de text */
+.input-section {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.input-section input {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    flex: 1;
+}
+
+.input-section input:focus {
+    border-color: #007BFF; /* Color de focus */
+    outline: none;
+}
+
+.input-section button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.input-section button:hover {
+    background-color: #0056b3;
+}
+
+/* Estil de la taula */
+#scrollView {
+    width: 100%;
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+#dataTable {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+#dataTable th, #dataTable td {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+#dataTable th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+#dataTable tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Botó de logout */
+#logoutButton {
+    padding: 10px 20px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+#logoutButton:hover {
+    background-color: #a71d2a;
+}
+/* Estil per a la taula amb colors de blau més sòlids */
+#dataTable {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+/* Colors de fons per a les cel·les de la taula */
+#dataTable th, #dataTable td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    color: #FFFFFF; /* Text blanc per garantir un bon contrast */
+}
+
+/* Color de fons per a la capçalera amb un blau intens */
+#dataTable th {
+    background-color: #2C5A9D; /* Blau més fosc per a la capçalera */
+    font-weight: bold;
+    color: white; /* Text blanc per contrastar amb el fons */
+}
+
+/* Fons alternant entre un blau suau més fosc i un blau fosc per les files */
+#dataTable tr:nth-child(even) {
+    background-color: #7FA9E2; /* Blau més fosc per a files parelles */
+}
+
+#dataTable tr:nth-child(odd) {
+    background-color: #2C5A9D; /* Blau més fosc per a files imparells */
+}
+
+/* Eliminat efecte hover */
+#dataTable tr:hover {
+    background-color: transparent; /* Sense canvi en el hover */
+}
+
+/* Fonts i estil de les cel·les */
+#dataTable th, #dataTable td {
+    color: white; /* Text blanc per a la capçalera i les cel·les */
+}
+
+

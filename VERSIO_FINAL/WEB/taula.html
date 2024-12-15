@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Taula</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="container">
+        <h1 id="welcomeMessage">Welcome!</h1>
+        <div class="input-section">
+            <input id="filterInput" type="text" placeholder="Filters ie: marks?mark=9" />
+            <button id="sendButton">Send</button>
+        </div>
+        <div id="scrollView">
+            <table id="dataTable">
+                <!-- Dinàmicament afegirem contingut aquí -->
+            </table>
+        </div>
+        <button id="logoutButton">Logout</button>
+    </div>
+    <script src="taula.js"></script>
+    <script src="Connexio.js"></script>
+    <script src="RutaManager.js"></script>
+
+</body>
+</html>
